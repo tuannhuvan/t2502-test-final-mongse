@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><%= pageTitle ? pageTitle + ' | ' : '' %>Pet Management Admin</title>
+
+    <!-- AdminLTE 3 (CDN) -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/overlayScrollbars@1.13.1/css/OverlayScrollbars.min.css"
+    />
+
+    <!-- Tailwind utilities (local file imports CDN) -->
+    <link rel="stylesheet" href="/public/css/style.css" />
+  </head>
+  <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+      <%- include('../partials/navbar') %>
+      <%- include('../partials/sidebar') %>
+
+      <div class="content-wrapper">
+        <%- include('../partials/page-header') %>
+
+        <section class="content">
+          <div class="container-fluid pb-3">
+            <% if (typeof error !== 'undefined' && error) { %>
+              <div class="alert alert-danger"><%= error %></div>
+            <% } %>
+            <%- body %>
+          </div>
+        </section>
+      </div>
+
+      <%- include('../partials/footer') %>
+    </div>
+
+    <!-- AdminLTE 3 scripts (CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/overlayScrollbars@1.13.1/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+  </body>
+</html>
