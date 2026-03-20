@@ -3,7 +3,7 @@
         <h3 class="card-title">Create Buddy</h3>
     </div>
     <form action="/admin/buddy/store" method="post">
-        <%- include('.form', { buddy: null, categories, form: ( typeof form !== 'undefined' ? form : {}) })%>
+        <%- include('_form', { buddy: null, categories, form: ( typeof form !== 'undefined' ? form : {}) }) %>
         <div class="card-footer d-flex justify-content-between">
             <a class="btn btn-secondary" href="/admin/buddy/list">
                 <i class="fas fa-arrow-left"></i> Back

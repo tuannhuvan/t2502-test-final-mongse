@@ -1,4 +1,4 @@
-const { name } = require('ejs');
+// const { name } = require('ejs');
 const Category = require('../models/Category');
 
 // Liệt kê tất cả category.
@@ -12,7 +12,7 @@ async function getCategoryByOptions() {
 }
 
 // Tạo mới một category với thông tin được cung cấp trong payload.
-async function crateCategory(payload) {
+async function createCategory(payload) {
     const doc = new Category({
         name: payload?.name,
         description: payload?.description || '',
@@ -29,7 +29,7 @@ async function deleteCategoryById(id) {
 module.exports = {
     listCategories,
     getCategoryByOptions,
-    crateCategory,
+    createCategory,
     deleteCategoryById,
 };
 

@@ -47,6 +47,28 @@ async function updateBuddyById(id, payload) {
 async function deleteBuddyById(id) {
     return Buddy.findByIdAndDelete(id);
 }
+// Lấy tất cả buddy với phân trang, mỗi trang hiển thị 5 buddy.
+async function getAll(page = 1, limit = 5) {
+    const skip = (page - 1) * limit;
+    
+    // Lấy dữ liệu có phân trang
+    const buddies = await Buddy.find()
+        .populate('category')
+        .skip(skip)
+        .limit(limit)
+        .sort({ createdAt: -1 }); // Hiện con mới nhất lên đầu
+
+    // Đếm tổng số lượng để tính tổng số trang
+    const totalBuddies = await Buddy.countDocuments();
+    const totalPages = Math.ceil(totalBuddies / limit);
+
+    return {
+        buddies,
+        currentPage: page,
+        totalPages,
+        totalBuddies
+    };
+}
 
 module.exports = {
     listBuddies,
@@ -54,6 +76,7 @@ module.exports = {
     createBuddy,
     updateBuddyById,
     deleteBuddyById,
+    getAll,
 };
 
 

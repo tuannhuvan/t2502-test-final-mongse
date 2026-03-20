@@ -2,8 +2,8 @@
     <div class="card-header">
         <h3 class="card-title">Edit Buddy</h3>
     </div>
-    <form action="/admin/buddy/update/<%= buddy.id %>" method="post">
-        <%- include('./form', { buddy, categories, form: null })%>
+    <form action="/admin/buddy/update/<%= buddy._id %>" method="post">
+        <%- include('./_form', { buddy, categories, form: null })%>
         <div class="card-footer d-flex justify-content-between">
             <a class="btn btn-secondary" href="/admin/buddy/list">
                 <i class="fas fa-arrow-left"></i> Back

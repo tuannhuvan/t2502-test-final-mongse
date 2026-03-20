@@ -1,28 +1,26 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <a href="/admin/buddy/list" class="brand-link">
-    <span class="brand-text font-weight-light">Pet Admin</span>
+    <span class="brand-text font-weight-light ml-3">Pet Admin</span>
   </a>
 
   <div class="sidebar">
     <nav class="mt-2">
-      <ul
-        class="nav nav-pills nav-sidebar flex-column"
-        data-widget="treeview"
-        role="menu"
-        data-accordion="false"
-      >
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+        
         <li class="nav-item">
-          <a href="/admin/buddy/list" class="nav-link">
+          <a href="/admin/buddy/list" class="nav-link <%= (typeof pageTitle !== 'undefined' && pageTitle.includes('Buddy')) ? 'active' : '' %>">
             <i class="nav-icon fas fa-paw"></i>
             <p>Buddies</p>
           </a>
         </li>
+
         <li class="nav-item">
-          <a href="/admin/category/list" class="nav-link">
+          <a href="/admin/category/list" class="nav-link <%= (typeof pageTitle !== 'undefined' && pageTitle.includes('Category')) ? 'active' : '' %>">
             <i class="nav-icon fas fa-tags"></i>
             <p>Categories</p>
           </a>
         </li>
+
       </ul>
     </nav>
   </div>

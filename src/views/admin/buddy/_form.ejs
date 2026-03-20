@@ -33,7 +33,7 @@
                 type="number"
                 min="0"
                 class="form-control"
-                value="<%= (buddy && buddy.age != null ? buddy.age : ((form && form.age != null) ? form.age : 0) %>"
+                value="<%= (buddy && buddy.age != null ? buddy.age : ((form && form.age != null) ? form.age : 0)) %>"
             />
         </div>
         <div class="form-group col-md-3">
@@ -70,9 +70,7 @@
     </div>
     <div class="form-group">
         <label>Description</label>
-        <textarea name="description" class="form-control" rows="4" placeholder="Enter description">
-            <%= (buddy && buddy.description ? buddy.description : (form && form.description ? form.description : '')) %>
-        </textarea>
+        <textarea name="description" class="form-control" rows="4" placeholder="Enter description"><%= (buddy && buddy.description ? buddy.description : (form && form.description ? form.description : '')) %></textarea>
     </div>
     <% const previewImage = (buddy && buddy.image) ? buddy.image : (form && form.image ? form.image : ''); %>
     <% if (previewImage) { %>

@@ -3,8 +3,21 @@ const categoryService = require('../services/categoryService');
 
 // Hiển thị danh sách buddy
 async function list(req, res) {
-    const buddies = await buddyService.listBuddies();
-    res.render('admin/buddy/list', {pageTitle: 'Buddies', buddies});
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = 5; // Bạn có thể chỉnh số lượng tùy ý ở đây
+
+        const { buddies, currentPage, totalPages } = await buddyService.getAll(page, limit);
+
+        res.render('admin/buddy/list', {
+            pageTitle: 'Buddy List',
+            buddies,
+            currentPage,
+            totalPages
+        });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 }
 
 // Hiển thị form tạo mới buddy
@@ -20,14 +33,14 @@ async function store(req, res) {
             ...req.body,
             age: req.body?.age === '' ? 0 : Number(req.body?.age), // Chuyển age sang số, nếu là chuỗi rỗng thì mặc định là 0
         });
-        return res.rediret('admin/buddy/list');
+        return res.redirect('/admin/buddy/list');
     } catch (err) {
         const categories = await categoryService.getCategoryByOptions();
         return res.status(400).render('admin/buddy/create', {
             pageTitle: 'Create Buddy',  // Cần truyền lại pageTitle để hiển thị tiêu đề trang
             categories,  // Cần truyền lại danh sách category để hiển thị dropdown
             error: err?.message || 'Create buddy failed! Please try again.', // Hiển thị lỗi nếu có
-            from: req.body, // Giữ lại dữ liệu đã nhập trong form
+            form: req.body, // Giữ lại dữ liệu đã nhập trong form
         });
     }
 }
@@ -55,7 +68,7 @@ async function update(req, res) {
             buddyService.getBuddyById(req.params.id),
             categoryService.getCategoryByOptions(),
         ]);
-        return res..status(400).render('admin/buddy/edit', {
+        return res.status(400).render('admin/buddy/edit', {
             pageTitle: 'Edit Buddy',  // Cần truyền lại pageTitle để hiển thị tiêu đề trang
             buddy: buddy || { _id: req.params.id, ...req.body },  // Nếu không tìm thấy buddy thì giữ lại dữ liệu đã nhập
             categories,  // Cần truyền lại danh sách category để hiển thị dropdown
