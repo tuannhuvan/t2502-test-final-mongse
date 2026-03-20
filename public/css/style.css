@@ -1,21 +1,68 @@
+/* 1. Nhúng Tailwind CSS Utility */
 @import url("https://cdn.jsdelivr.net/npm/tailwindcss@3.4.2/dist/tailwind.min.css");
 
+/* 2. Định nghĩa độ rộng cố định cho các cột Table (Khớp với EJS) */
 .th-width-70 {
-  width: 70px;
+    width: 70px;
+    text-align: center;
 }
 
 .th-width-140 {
-  width: 140px;
-}
-.th-width-20 {
-  width: 220px;
+    width: 140px;
 }
 
+/* Sửa lỗi th-width-20 thành 220 để khớp với class trong list.ejs */
+.th-width-220 {
+    width: 220px;
+}
+
+/* 3. Căn chỉnh Form và Nút bấm */
 .inline-form {
-  display: inline;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
 }
 
+/* Khoảng cách giữa nút Edit và Delete */
+.table td .btn {
+    margin-right: 4px;
+}
+
+/* 4. Hiển thị ảnh xem trước (Preview Image) */
 .buddy-image-preview {
     width: 160px;
-    object-fit: cover;
+    height: 120px;
+    object-fit: cover; /* Giúp ảnh không bị méo khi sai tỉ lệ */
+    border-radius: 8px;
+    border: 2px solid #dee2e6;
+    margin-top: 10px;
+    display: block;
+    transition: transform 0.2s;
+}
+
+.buddy-image-preview:hover {
+    transform: scale(1.05); /* Hiệu ứng phóng to nhẹ khi di chuột */
+}
+
+/* 5. Tinh chỉnh giao diện Table */
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05) !important;
+}
+
+/* Đảm bảo nội dung trong ô canh giữa theo chiều dọc */
+.table td {
+    vertical-align: middle !important;
+}
+
+/* 6. Tùy chỉnh Sidebar Active (Làm nổi bật menu đang chọn) */
+.nav-sidebar .nav-link.active {
+    background-color: #007bff !important;
+    color: #ffffff !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* 7. Xử lý Textarea */
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
 }
