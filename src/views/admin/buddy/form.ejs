@@ -1,0 +1,92 @@
+<div class="card-body">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label>Name</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                name="name" 
+                value="<%= buddy && buddy.name ? buddy.name: (form && form.name ? form.name : '') %>" 
+                placeholder="Enter name"
+                required
+            />
+        </div>
+        <div class="form-group col-md-6">
+            <label>Category</label>
+            <select name="category" class="form-control" required>
+                <option value="">Select category</option>
+                <% (categories || []).forEach((c) => { %>
+                    <%
+                        const currentCategoryId = (buddy && buddy.category && buddy.category._id) ? String(buddy.category._id) :(buddy && buddy.category ? String(buddy.category) : (form && form.category ? String(form.category) : ''));
+                        const isSelected = currentCategoryId && currentCategoryId === String(c._id);
+                    %>
+                    <option value="<%=c._id%>" <%= isSelected ? 'selected' : '' %>><%= c.name %></option>
+                <% }) %>
+            </select>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label>Age</label>
+            <input
+                name="age"
+                type="number"
+                min="0"
+                class="form-control"
+                value="<%= (buddy && buddy.age != null ? buddy.age : ((form && form.age != null) ? form.age : 0) %>"
+            />
+        </div>
+        <div class="form-group col-md-3">
+            <label>Gender</label>
+            <select name="gender" class="form-control" required>
+                <%
+                    const currentGender = buddy && buddy.gender ? buddy.gender : (form && form.gender ? form.gender : '');
+                %>
+                <option value="">Select Gender</option>
+                <option value="male" <%= currentGender === 'male' ? 'selected' : '' %>>Male</option>
+                <option value="female" <%= currentGender === 'female' ? 'selected' : '' %>>Female</option>
+            </select>
+        </div>
+        <div class="form-group col-md-6">
+            <label>Breed</label>
+            <input
+                name="breed"
+                type="text"
+                class="form-control"
+                value="<%= (buddy && buddy.breed ? buddy.breed : (form && form.breed ? form.breed : '')) %>"
+                placeholder="Enter breed"
+            />
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Image (URL)</label>
+        <input
+            name="image"
+            type="text"
+            class="form-control"
+            value="<%= (buddy && buddy.image ? buddy.image : (form && form.image ? form.image : '')) %>"
+            placeholder="Enter image URL"
+        />
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea name="description" class="form-control" rows="4" placeholder="Enter description">
+            <%= (buddy && buddy.description ? buddy.description : (form && form.description ? form.description : '')) %>
+        </textarea>
+    </div>
+    <% const previewImage = (buddy && buddy.image) ? buddy.image : (form && form.image ? form.image : ''); %>
+    <% if (previewImage) { %>
+        <div class="form-group">
+            <label>Preview</label>
+            <div>
+                <img
+                    src="<%= previewImage %>"
+                    alt="Buddy image"
+                    class="img-thumbnail buddy-image-preview"
+                    onerror="this.classList.add('d-none')"
+                />
+            </div>
+        </div>
+    <% } %>
+    </div>
+</div>

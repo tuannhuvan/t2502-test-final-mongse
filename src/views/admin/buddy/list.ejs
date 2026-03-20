@@ -1,0 +1,62 @@
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="card-title">Buddy List</h3>
+            <a href="/admin/buddy/create" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus"></i> Add New Buddy
+            </a>
+        </div>
+    </div>
+    <div class="card-body table-responsive p-0">
+        <table class="table table-hover text-nowrap">
+            <thead>
+                <tr>
+                    <th class="th-width-70">#</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Age</th>
+                    <th>Gender</th>
+                    <th>Breed</th>
+                    <th class="th-width-220">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if ( !buddies || buddies.length === 0 ) { %>
+                    <tr>
+                        <td colspan="7" class="text-center text-muted py-4">
+                            No buddies yet.
+                        </td>
+                    </tr>
+                <% } %>
+                <% (buddies || []).forEach((b, idx => { %>
+                <tr>
+                    <td><%= idx + 1 %></td>
+                    <td><%= b.name %></td>
+                    <td><%= (b.category && b.category.name) ? b.category.name : '' %></td>
+                    <td><%= b.age ?? 0 %></td>
+                    <td><%= b.gender === 'male' ? 'Male' : 'Female' %></td>
+                    <td><%= b.breed || '' %></td>
+                    <td>
+                        <a
+                            class="btn btn-warning btn-sm"
+                            href="/admin/buddy/edit/ <%= b._id %>"
+                        >
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
+                        <form
+                            action="/admin/buddy/delete/ <%= b._id%>"
+                            method="POST"
+                            onsubmit="return confirm('Delete this buddy?')"
+                            class="inline-form"
+                        >
+                            <button class="btn btn-danger btn-sm" type="submit">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+</div>

@@ -1,0 +1,39 @@
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Create Category</h3>
+    </div>
+    <form action="/admin/category/store" method="POST">
+        <div class="card-body">
+            <div class="form-group">
+                <label>Name</label>
+                <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    placeholder="Enter category name: Dog, Cat, ..."
+                    required
+                    value="<%= (form && form.name) ? form.name : '' %>"
+                />
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <textarea
+                    name="description"
+                    class="form-control"
+                    placeholder="Enter category description"
+                    rows="3"
+                >
+                    <%= (form && form.description) ? form.description : '' %>
+                </textarea>
+            </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <a class="btn btn-secondary" href="/admin/category/list">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save
+            </button>
+        </div>
+    </form>
+</div>
